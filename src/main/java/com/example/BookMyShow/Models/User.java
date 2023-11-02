@@ -1,6 +1,7 @@
 package com.example.BookMyShow.Models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
 
@@ -13,6 +14,8 @@ import lombok.*;
 @Builder
 public class User {
 
+    @Id
+    private Integer userId;
     private String userName;
     private String mobileNo;
     private int age;

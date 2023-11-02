@@ -54,6 +54,7 @@ public class TheaterService {
                     .seatsType(SeatsType.CLASSIC)
                     .theater(theater)
                     .build();
+
             theaterSeatsList.add(theaterSeats);
         }
 
@@ -77,6 +78,8 @@ public class TheaterService {
                     .build();
             theaterSeatsList.add(theaterSeats);
         }
+
+        theater.setTheaterSeats(theaterSeatsList);
         theaterRepository.save(theater);
     }
 }
