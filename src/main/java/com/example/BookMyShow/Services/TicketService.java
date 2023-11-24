@@ -3,10 +3,13 @@ package com.example.BookMyShow.Services;
 import com.example.BookMyShow.Models.*;
 import com.example.BookMyShow.Repository.*;
 import com.example.BookMyShow.RequestDTOs.BookTicketRequest;
+import com.example.BookMyShow.Transformers.TicketTransformer;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -68,5 +71,34 @@ public class TicketService {
         Show show = showRepository.findShowByShowDateAndShowTimeAndMovieAndTheater(bookTicketRequest.getShowDate(),bookTicketRequest.getShowTime(),movie,theater);
 
         return show;
+    }
+
+    public ResponseEntity<?> getTicket(String email) throws Exception{
+        User user = userRepository.findUserByEmail(email);
+
+        if(user == null) return ResponseEntity.ofNullable("User Not found");
+
+        List<Ticket> ticketList = user.getTicketList();
+        List<TicketTransformer> ticketTransformerList = new ArrayList<>();
+        for(Ticket ticket : ticketList)
+        {
+            if(email.equals(ticket.getUser().getEmail()))
+            {
+                TicketTransformer ticketTransformer = new TicketTransformer();
+
+                ticketTransformer.setUserName(ticket.getUser().getUserName());
+                ticketTransformer.setMovieName(ticket.getMovieName());
+                ticketTransformer.setTotalPrice(ticket.getTotalPrice());
+                ticketTransformer.setTheaterAddress(ticket.getTheaterAddress());
+                ticketTransformer.setShowTime(ticket.getShowTime());
+                ticketTransformer.setShowDate(ticket.getShowDate());
+                ticketTransformer.setBookedSeats(ticket.getBookedSeats());
+
+                ticketTransformerList.add(ticketTransformer);
+            }
+        }
+        if(ticketTransformerList.size() == 0) return ResponseEntity.ok("Please Book Ticket First!!!!");
+
+        return  ResponseEntity.ok(ticketTransformerList);
     }
 }

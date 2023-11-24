@@ -5,10 +5,7 @@ import com.example.BookMyShow.Services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/movie")
@@ -26,7 +23,20 @@ public class MovieController {
             return new ResponseEntity<>(result, HttpStatus.OK);
         }catch (Exception e)
         {
-            return new ResponseEntity("Please Enter Valid Unic Move Name",HttpStatus.NOT_FOUND);
+            return new ResponseEntity("Please Enter Valid Unic Movie Name",HttpStatus.NOT_FOUND);
         }
     }
+    @DeleteMapping("/deleteMovie{movieName}")
+    public ResponseEntity deleteMovie(@PathVariable String movieName)
+    {
+        try {
+            String result = movieService.deleteMovie(movieName);
+
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }catch (Exception e)
+        {
+            return new ResponseEntity("Please Enter Valid Movie Name",HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

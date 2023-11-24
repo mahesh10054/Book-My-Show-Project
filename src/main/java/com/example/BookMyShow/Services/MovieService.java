@@ -20,4 +20,13 @@ public class MovieService {
 
         return "Movie Added Successfully On to the DB";
     }
+
+    public String deleteMovie(String movieName) throws Exception {
+        Movie movie = movieRepository.findMovieByMovieName(movieName);
+
+        if(movie == null) throw new Exception();
+        movieRepository.delete(movie);
+
+        return "Movie Deleted Successfully On to the DB";
+    }
 }
