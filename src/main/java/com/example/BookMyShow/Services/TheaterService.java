@@ -13,10 +13,8 @@ import java.util.List;
 
 @Service
 public class TheaterService {
-
     @Autowired
     TheaterRepository theaterRepository;
-
 
     public String addTheater(AddTheaterRequest addTheaterRequest)
     {
@@ -79,7 +77,8 @@ public class TheaterService {
             theaterSeatsList.add(theaterSeats);
         }
 
-        theater.setTheaterSeats(theaterSeatsList);
+        theater.setTheaterSeatsList(theaterSeatsList);
+
         theaterRepository.save(theater);
     }
 }

@@ -1,10 +1,10 @@
 package com.example.BookMyShow.Controller;
 
 import com.example.BookMyShow.RequestDTOs.AddShowRequest;
+import com.example.BookMyShow.RequestDTOs.AddShowSeatRequest;
 import com.example.BookMyShow.Services.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,9 +23,9 @@ public class ShowController {
     }
 
     @PostMapping("/createShowSeats")
-    public ResponseEntity createShowSeats(@RequestParam Integer showId)
+    public ResponseEntity createShowSeats(@RequestBody AddShowSeatRequest addShowSeatsRequest)
     {
-        String result = showService.createShowSeats(showId);
+        String result = showService.createShowSeats(addShowSeatsRequest);
 
         return new ResponseEntity(result,HttpStatus.OK);
     }

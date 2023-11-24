@@ -8,8 +8,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class AddTheaterRequest {
     private String name;
     private String address;

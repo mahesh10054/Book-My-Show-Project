@@ -15,9 +15,8 @@ import java.util.List;
 @Table(name = "theater")
 @Builder
 public class Theater {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer theaterId;
     private String name;
     private String address;
@@ -25,9 +24,10 @@ public class Theater {
     private City city;
 
     @OneToMany(mappedBy = "theater",cascade = CascadeType.ALL)
-    private List<TheaterSeats> theaterSeats = new ArrayList<>();
+    private List<TheaterSeats> theaterSeatsList = new ArrayList<>();
 
     @OneToMany(mappedBy = "theater",cascade = CascadeType.ALL)
     private List<Show> showList = new ArrayList<>();
+
 
 }

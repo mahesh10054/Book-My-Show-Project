@@ -10,8 +10,6 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class AddMovieRequest {
     private String movieName;
     private double rating;
